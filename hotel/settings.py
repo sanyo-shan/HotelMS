@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'hotels',
-    'register',
-    'login',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -109,7 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'register.Register'
+AUTH_USER_MODEL = 'accounts.Register'
+#  Use my custom user model for authentication instead of the default User model provided by Django. This allows for additional fields and customization in the user model.
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/

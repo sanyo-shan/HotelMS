@@ -19,4 +19,9 @@ class HotelSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Hotel
-        fields = '__all__'
+        exclude = ['rating']
+
+    def validate_state(self, value):
+        if not value.isalpha():
+            raise serializers.ValidationError("State must contain only alphabetic characters.")
+        return value

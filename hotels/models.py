@@ -1,5 +1,6 @@
 from django.db import models
 from utility.models import BaseModel
+from django.contrib.auth.models import User
 
 class Amenity(BaseModel):
     name = models.CharField(max_length=100)
@@ -25,12 +26,10 @@ class Hotel(BaseModel):
     amenities = models.ManyToManyField(Amenity, related_name='hotels', blank=True)
 
     def __str__(self):
-        return self.name
+        return f"Hotel: {self.name} | City: {self.city}"
 
 class Booking(BaseModel):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='bookings')
-    guest_name = models.CharField(max_length=100)
-    guest_email = models.EmailField()
     check_in_date = models.DateField()
     check_out_date = models.DateField()
     number_of_guests = models.PositiveIntegerField()
@@ -41,7 +40,7 @@ class Booking(BaseModel):
 
 class HotelRating(BaseModel):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='ratings')
-    user = models.CharField(max_length=100)  # Assuming a simple user representation
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Assuming a simple user representation
     rating = models.DecimalField(max_digits=3, decimal_places=2)
     review = models.TextField(blank=True, null=True)
 

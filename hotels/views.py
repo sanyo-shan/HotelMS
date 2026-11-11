@@ -59,15 +59,15 @@ class AmenityAPI(APIView):
     def get(self, request):
         query_set = Amenity.objects.all()
         serializer = AmenitySerializer(query_set, many=True)
-        return Response(serializer.data)
+        return Response({"message": "Amenities fetched", "data": serializer.data, "status": True}, status=200)
 
     def post(self, request):
         data = request.data
         serializer = AmenitySerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
+            return Response({"message": "Amenities created successfully", "data": serializer.data, "status": True}, status=201)
+        return Response({"message": "Amenities creation failed", "data": serializer.errors, "status": False}, status=400)
 
     def put(self, request):
         data = request.data
