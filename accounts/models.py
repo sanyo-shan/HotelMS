@@ -1,11 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+# AbstractUser - Provides built-in fields and methods such as password, first name, last name, is_staff, is_superuser, is_active, etc.
+# BaseUserManager - Provides methods to manage user creation
 
-# Create your models here.
-class Register(AbstractUser):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
-    email = models.EmailField()
+class Member:
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.username
+        return f"{self.user.first_name} {self.user.last_name}"
+

@@ -108,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'accounts.Register'
 #  Use my custom user model for authentication instead of the default User model provided by Django. This allows for additional fields and customization in the user model.
 
 
