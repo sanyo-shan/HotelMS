@@ -13,7 +13,7 @@ class Amenity(BaseModel):
 class Hotel(BaseModel):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    rating = models.DecimalField(max_digits=3, decimal_places=2)
+    rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
     address = models.TextField()
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)

@@ -105,3 +105,33 @@ class AdminAmenityAPI(APIView):
         amenity.delete()
         return Response({"message": "Amenity deleted successfully."}, status=200)
     
+
+# Member Views:
+
+class hotelAPI(APIView):
+    def get(self, request):
+        query_set = Hotel.objects.all()
+        state = request.GET.get("state")
+        price = request.GET.get("price")
+        price_filter = request.GET.get("price_filter", "gte")
+        _range = request.GET.get("range")
+        cities = request.GET.get("cities")
+
+        if state:
+            query_set = query_set.filter(state__icontains=state)
+        if price:
+            if price_filter == 'gte':
+                query_set = query_set.filter(price__gte=price)
+            elif price_filter =='lte':
+                query_set = query_set.filter(price__lte=price)
+        if cities:
+            cities_list = cities.split(",")
+            query_set = query_set.filter(city__in=cities_list)
+        if _range:
+            _range = _range.split(",")
+            if len(_range) == 2:
+                query_set = query_set.filter(price__gte=int(_range[0]), price__lte=int(_range[1]))
+        
+        serializer = HotelSerializer(query_set, many=True)
+        return Response({"message": "Hotels fetched","count": query_set.count(), 
+                         "data": serializer.data}, status=200)

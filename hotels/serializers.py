@@ -24,7 +24,7 @@ class HotelSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Hotel
-        exclude = ['rating']
+        fields = '__all__'
 
     # Note: Above PrimaryKeyRelatedField operates like the function below. 
     # def validate_amenities_data(self, value):
