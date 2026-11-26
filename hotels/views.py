@@ -6,8 +6,8 @@ from hotels.serializers import HotelSerializer, AmenitySerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 # Create your views here.
-class HotelAPI(APIView):
-    permission_classes = [IsAuthenticated]
+class AdminHotelAPI(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, request):
         query_set = Hotel.objects.all()
@@ -54,8 +54,8 @@ class HotelAPI(APIView):
         return Response({"message": "Hotel deleted successfully."}, status=200)
     
 
-class AmenityAPI(APIView):
-    permission_classes = [IsAuthenticated]
+class AdminAmenityAPI(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
     def get(self, request):
         query_set = Amenity.objects.all()
         serializer = AmenitySerializer(query_set, many=True)

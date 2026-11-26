@@ -68,7 +68,7 @@ function setupLogin(formId, usernameId, passwordId) {
                 console.log("Target")
                 saveTokens(data.access, data.refresh)
 
-                window.location.href = "/api/home/member/";
+                window.location.href = "/api/home/";
 
             } else {
                 alert("Invalid credentials");

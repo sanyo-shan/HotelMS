@@ -13,9 +13,14 @@ class BaseSerializer(serializers.ModelSerializer):
                   'last_name', 'phone']
 
     def validate_password(self, password):
-        return len(password) >= 8 
+        print("Inside Password validator")
+        if len(password) < 8:  
+            raise serializers.ValidationError(
+            "Password must be at least 8 characters long.")
+        return password
 
     def create(self, validated_data):
+        print("Inside create")
         phone = validated_data.pop('phone')
         user = User.objects.create_user(**validated_data, is_staff = self.is_staff)
         member = Member.objects.create(user=user, phone=phone)
@@ -29,10 +34,9 @@ class AdminSerializer(BaseSerializer):
 
 
 # ********* Login *********
-class LoginSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["username"]
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
 
     def validate(self, data):
         user = authenticate(username=data.get('username'), password=data.get('password'))

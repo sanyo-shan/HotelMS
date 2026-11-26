@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const firstname = document.getElementById("firstname");
     const lastname = document.getElementById("lastname");
     const password = document.getElementById("password");
+    const phone = document.getElementById("phoneNumber")
     const confirmPassword = document.getElementById("confirmPassword");
     const passwordMessage = document.getElementById("passwordMessage"); // Access the values from the form.
     const endpoint = form.dataset.endpoint; // To get endpoint from the data that is being sent.  
@@ -36,7 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
             first_name: firstname.value,
             last_name: lastname.value,
             password: password.value,
-            confirm_password: confirmPassword.value
+            confirm_password: confirmPassword.value,
+            phone: phone.value
         };
 
         try {
@@ -69,4 +71,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-});
+}); 

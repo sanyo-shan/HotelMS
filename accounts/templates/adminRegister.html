@@ -11,7 +11,7 @@
     <div class="register-card">
         <h2>Library Member Registration</h2>
 
-        <form id="registerForm" data-endpoint="/api/member-register/" method="POST">
+        <form id="registerForm" data-endpoint="/api/admin-register/" method="POST">
             {% csrf_token %}
 
             <div class="form-group">
@@ -39,6 +39,19 @@
                 <input type="password" id="confirmPassword" required>
                 <small id="passwordMessage"></small>
             </div>
+
+            <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input
+                type="tel"
+                id="phoneNumber"
+                name="phoneNumber"
+                placeholder="Enter phone number"
+                pattern="[0-9]{10}"
+                required
+            >
+            <small id="phoneMessage"></small>
+        </div>
 
             <button type="submit" class="register-btn">
                 Register

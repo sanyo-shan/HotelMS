@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-        const response = await authFetch("/api/home/member/1/");
+        const response = await authFetch("/api/home/1/");
         if (!response.ok) throw new Error(`Home API returned ${response.status}`);
 
         const data = await response.json()
